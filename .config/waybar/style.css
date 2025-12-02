@@ -1,0 +1,150 @@
+/*
+ * Arquivo: ~/.config/waybar/style.css
+ * IMPORTANTE: O caminho absoluto do Pywal foi corrigido.
+ */
+@import url("/home/nicollas/.cache/wal/colors-waybar.css");
+
+/* Variáveis de Cor do Pywal estão disponíveis agora:
+ * @background, @foreground, @color0 até @color15
+ * Usaremos @color1 (vermelho do Pywal) e @color4 (azul do Pywal) para destaque.
+ */
+
+* {
+    font-family: Maple Mono;
+    border-radius: 9px;
+    font-size: 12px;
+    color: @foreground; /* Usa a cor de texto do Pywal */
+    min-height: 0;
+    padding: 0 4px;
+}
+
+/* Fundo da Waybar: Corrigido o aviso do linear-gradient e usando @background */
+window#waybar {
+    /* Usando background-color para evitar o warning e usando a cor de fundo do Pywal */
+	opacity: 0.9;   
+     background-color: @background; 
+    border-radius: 14px;
+    border-style: none;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* Removendo fundos coloridos nos botões */
+button {
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+/* Efeito Hover (Foco): Usando @color1 (Vermelho/Laranja do Pywal) */
+button:hover {
+    background-color: @color1; /* Cor de destaque do Pywal com transparência */
+    box-shadow: none;
+}
+
+/* Workspaces */
+#workspaces button {
+    padding: 5px 5px 5px;
+    margin: 4px 4px;
+    border-radius: 10px;
+    
+    background-color: @color0; /* Fundo sutilmente mais escuro */
+    color: @color8; /* Cor de texto do Pywal para inativos (Cor Brilhante 0) */
+    border-bottom: 3px solid rgba(0, 0, 0, 0.4);
+}
+
+#workspaces button:hover {
+    background: transparent;
+    box-shadow: inset 0 -3px @color1; /* Destaque sutil com @color1 do Pywal */
+}
+
+#workspaces button.focused {
+    background-color: transparent;
+    color: @foreground;
+    box-shadow: inset 0 -3px @color4; /* Destaque Foco com @color4 (Azul ou Cor Principal do Pywal) */
+}
+
+#workspaces button.urgent {
+    background-color: @color1; /* Destaque Urgência com @color1 */
+}
+
+/* Modo (Ex: i3/Sway mode) */
+#mode {
+    background-color: @color1; /* Fundo sólido com @color1 do Pywal */
+    box-shadow: none;
+    padding: 0 10px;
+}
+
+/* Estilo Básico para Todos os Módulos */
+#clock, #battery, #cpu, #memory, #disk, #temperature, #backlight, #network, 
+#pulseaudio, #wireplumber, #custom-media, #tray, #mode, #idle_inhibitor, 
+#scratchpad, #power-profiles-daemon, #mpd, #custom-wallpaper { /* Adicionado custom/wallpaper aqui */
+    background-color: transparent;
+    padding: 5px 12px;
+    border-radius: 8px;
+    margin: 5px;
+    color: @foreground; /* Cor de texto principal do Pywal */
+}
+
+
+/* Módulos Específicos: CORREÇÃO DE CORES (usando variáveis Pywal e removendo cores hardcoded) */
+
+/* Os módulos abaixo agora usam @color4 (ou outra de sua escolha) para destaque */
+#pulseaudio {
+    color: @color4; 
+    /* Removendo text-shadow hardcoded para manter a coesão Pywal */
+    /* Removendo padding/margin repetidos (já definidos acima) */
+}
+
+#clock {
+    color: @color4; 
+    /* Removendo text-shadow hardcoded */
+}
+
+/* CPU e Memory */
+#cpu {
+    color: @color4; 
+    /* Removendo text-shadow hardcoded */
+}
+
+#memory {
+    color: @color4; /* CORREÇÃO: Estava apenas como @color (erro de sintaxe). Agora usa @color4. */
+    /* Removendo text-shadow hardcoded */
+}
+
+/* Rede */
+#network.disconnected {
+    color: @color1; /* Destaque com o vermelho/laranja do Pywal */
+}
+
+/* Pulseaudio/Wireplumber */
+#pulseaudio.muted,
+#wireplumber.muted {
+    color: @color8; /* Cor de atenção sutil do Pywal */
+}
+
+/* Tray */
+#tray > .needs-attention {
+    background-color: @color1;
+}
+
+#temperature.critical {
+    color: @color1;
+}
+
+/* Outras configurações que não afetam o visual minimalista */
+#window,
+#workspaces {
+    margin: 0 2px;
+}
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
